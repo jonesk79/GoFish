@@ -1,3 +1,5 @@
+require './lib/player.rb'
+
 class Game
   attr_reader :player1, :player2, :deck
 
@@ -34,5 +36,19 @@ class Game
     end
 
     hand
+  end
+
+  def exchange_card(card, asker)
+    if asker == "player1"
+      if player2.check_hand(card)
+        player2.give_card(card)
+        player1.take_card(card)
+      end
+    elsif asker == "player2"
+      if player1.check_hand(card)
+        player1.give_card(card)
+        player2.take_card(card)
+      end
+    end
   end
 end
